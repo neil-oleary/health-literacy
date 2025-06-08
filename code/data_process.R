@@ -25,16 +25,16 @@ var_label_list <- as.list(var_labels) %>%
   setNames(col_names)
 
 # Read local data export for labelled data
-data_labelled <- read_excel("../../Data Exports/QuestionPro-SR-RawData-display answer and questions format.xlsx", 
+data_ihf_raw <- read_excel("../../Data Exports/QuestionPro-SR-RawData-display answer and questions format.xlsx", 
                             sheet = "Raw Data", skip = 2, col_names = FALSE)
-colnames(data_labelled) <- col_names
+colnames(data_ihf_raw) <- col_names
 
-data_labelled <- data_labelled %>%
+data_ihf_raw <- data_ihf_raw %>%
   set_variable_labels(.labels = var_label_list)
 
 
 # Start manually selecting and renaming variables
-data_processed <- data_labelled %>%
+data_ihf <- data_ihf_raw %>%
   select(demo_age = `6 - Q34 `,
          demo_sex = `7 - Q35 `,
          demo_genderident = `8 - Q36 `,
@@ -142,7 +142,7 @@ data_processed <- data_labelled %>%
                            ordered = TRUE))) 
 
 # Generate the domain scores (in separate dataframe to avoid numeric conversion errors)
-data_domains <- data_processed %>%
+data_domains <- data_ihf %>%
   mutate(across(starts_with("hlq_p1_q"), ~as.numeric(.x))) %>%
   mutate(across(starts_with("hlq_p2_q"), ~as.numeric(.x))) %>%
   mutate(across(starts_with("eheals_q"), ~as.numeric(.x))) %>%
@@ -161,6 +161,6 @@ data_domains <- data_processed %>%
   select(contains("_dom_"), "eheals_score")
 
 # Combine with main dataset
-data_processed <- data_processed %>%
+data_ihf <- data_ihf %>%
   cbind(data_domains)
 
