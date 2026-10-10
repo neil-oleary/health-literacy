@@ -11,3 +11,9 @@ Data analysis and summary of results of health literacy survey in Ireland from i
 **md_summary.R:** to examine missing data frequency and patterns in survey dataset, as per study SAP
 
 **inspect_scores.R:** to inspect distribution of individual domain scores and instruments as per study SAP
+
+**summary_demo_health.R**
+
+**summary_outcomes.R**
+
+**domain_modelling.R**

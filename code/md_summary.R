@@ -2,7 +2,7 @@
 
 library(mice)
 
-md.pattern(data_processed, plot = FALSE)
+md.pattern(data_ihf, plot = FALSE)
 
 # No missing data!
 
